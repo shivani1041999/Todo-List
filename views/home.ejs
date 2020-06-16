@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <title>
+            <%= title%>
+           
+        </title>
+        <link rel="stylesheet" href="/css/home.css">
+    </head>
+    <body>
+        <div id = "app">
+            <h1>Todo app</h1>
+            <form action = "/add-task" method="POST" id = "form1 ">
+                <div id = "input1">
+                    <label for = "desc">Description</label>
+                    <input type="text" id = "desc" name = "desc" autocomplete = "off" required placeholder="What do you need to do?">
+                </div>
+                <div class = "flex">
+                    <div class = "input" id = "input2">
+                        <label for = "category">Category</label>
+                        <select name="category" id="category"> 
+                            <option disabled selected>Choose a Category</option>
+                            <option value="Personal">Personal</option>
+                            <option value="Work">Work</option>
+                            <option value="School">School</option>
+                            <option value="College">College</option>
+                            <!-- <option value="Study">Study</option> -->
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class = "input">
+                        <label for = "date">Due Date</label>
+                        <input type="date" id = "desc" name = "desc">
+                    </div>
+                </div>
+                    <button type = "submit" id = "btn1" value = "add">
+                        <i class="fas fa-plus"></i>
+                        ADD TASK
+                    </button>
+                    <div id = "space"></div>
+            </form>     
+
+            <form action = "/delete-todolist" method="POST">
+                 <button id = "btn2" type = "submit">
+                        <i class="fas fa-trash-alt"></i>DELete Task
+                 </button>
+                <div id = "tasks">
+                    <ul>
+                        <% for(let i of todo_list){ %>
+                            <li>    
+                                <div class = "desc">                         
+                                    <!-- onchange="this.form.submit()"-->
+                                    <input type = "checkbox" name = "check"  class="strikethrough" value = "<%= i._id %>"> 
+                                    <p class = "task-desc"><%= i.desc %></p><br>
+                                    <div class = "task-date">
+                                        <i class = "fas fa-calendar-alt"></i>
+                                        <p><%= i.date %></p>
+                                    </div> 
+                                </div>
+                                <div class = "task-category">
+                                    <p><%= i.category %></p>
+                                </div>                            
+                            </li>
+                        <% } %>
+                    </ul>
+
+                </div>
+            </form>
+        </div>        
+        <script src = "/js/home.js"></script>
+        <script src="https://kit.fontawesome.com/31db3edf0d.js" crossorigin="anonymous"></script>
+    </body>
+</html>
